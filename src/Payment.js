@@ -15,7 +15,7 @@ function Payment() {
   const elements = useElements();
 
   const [succeeded, setSucceeded] = useState(false);
-  // const [processing, setProcessing] = useState("");
+  const [processing, setProcessing] = useState("");
   const [error, setError] = useState(null);
   const [disabled, setDisabled] = useState(true);
   const [clientSecret, setClientSecret] = useState(true);
@@ -36,7 +36,7 @@ function Payment() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    // setProcessing(true);
+    setProcessing(true);
 
     const payload = await stripe
       .confirmCardPayment(clientSecret, {
@@ -59,7 +59,7 @@ function Payment() {
 
         setSucceeded(true);
         setError(null);
-        // setProcessing(false);
+        setProcessing(false);
 
         // dispatch({
         //   type: "EMPTY_BASKET",
@@ -127,7 +127,7 @@ function Payment() {
                 {/* <button disabled={processing || disabled || succeeded}>
                   <span>{processing ? <p>Processing</p> : "Buy Now"}</span>
                 </button> */}
-                <button disabled={disabled || succeeded}>
+                <button onClick={() => navigate("/orders")}>
                   <span>"Buy Now"</span>
                 </button>
               </div>
